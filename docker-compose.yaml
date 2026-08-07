@@ -1,0 +1,29 @@
+x-base: &base-backend
+  build:
+    target: base
+    context: .
+    args:
+      USER_ID: ${RUN_AS_USER:-1000}
+  env_file: ./.env
+  volumes:
+    - venv_data:/opt/venv
+    - ./:/app:delegated
+  networks:
+    - default
+    - shared_network
+
+services:
+  app:
+    <<: *base-backend
+    hostname: app.template.service
+    ports:
+      - ${EXPOSE_APP_PORT:-8000}:8000
+    command: uv run --no-sync poe start-dev
+
+volumes:
+  venv_data:
+    driver: local
+
+networks:
+  shared_network:
+    external: true

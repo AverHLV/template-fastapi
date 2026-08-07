@@ -1,0 +1,6 @@
+*
+!/.box
+!/src
+!/Dockerfile
+!/pyproject.toml
+!/uv.lock
