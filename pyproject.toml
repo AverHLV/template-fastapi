@@ -23,6 +23,23 @@ dev = [
     "ruff==0.16.0",
 ]
 
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "src/conftest.py",
+    "src/main.py",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+    "@(abc\\.)?abstractmethod",
+]
+
 [tool.poe]
 executor = "simple"
 
